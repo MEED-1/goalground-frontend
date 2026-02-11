@@ -1,0 +1,7 @@
+{
+  "name": "GoalGround",
+  "description": "Morocco's premier football terrain booking and community platform.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}

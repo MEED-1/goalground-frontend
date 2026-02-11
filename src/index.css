@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: 'Barlow Condensed', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+
+  /* Default Dark Mode (Legacy) */
+  --color-background-dark: #0A0A0A;
+  --color-card-dark: #111111;
+  --color-border-dark: #1F1F1F;
+  --color-text-dark: #FFFFFF;
+  --color-text-muted-dark: #9CA3AF;
+
+  /* Light Mode */
+  --color-background-light: #F9FAFB;
+  --color-card-light: #FFFFFF;
+  --color-border-light: #E5E7EB;
+  --color-text-light: #111827;
+  --color-text-muted-light: #4B5563;
+
+  --color-primary: #00FF87;
+  --color-primary-hover: #00CC6A;
+
+  --color-pos-gk: #FACC15;
+  --color-pos-def: #3B82F6;
+  --color-pos-mid: #00FF87;
+  --color-pos-att: #EF4444;
+}
+
+:root {
+  --color-background: var(--color-background-dark);
+  --color-card: var(--color-card-dark);
+  --color-border: var(--color-border-dark);
+  --color-text: var(--color-text-dark);
+  --color-text-muted: var(--color-text-muted-dark);
+}
+
+:root.light {
+  --color-background: var(--color-background-light);
+  --color-card: var(--color-card-light);
+  --color-border: var(--color-border-light);
+  --color-text: var(--color-text-light);
+  --color-text-muted: var(--color-text-muted-light);
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Custom Leaflet Marker override for React */
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
