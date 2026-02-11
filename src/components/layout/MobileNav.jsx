@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Home, Map, Trophy, User, PlusCircle, Layout, FileText, ClipboardList } from 'lucide-react';
+import { Home, Map, Trophy, User, PlusCircle, Layout, FileText, ClipboardList, Users } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../context/AuthContext';
 
@@ -35,6 +35,13 @@ export const MobileNav = () => {
               <Trophy size={20} />
               <span className="text-[10px] mt-1">{t('nav.find_match')}</span>
             </NavLink>
+
+            <NavLink to="/players" className={({ isActive }) =>
+              `flex flex-col items-center justify-center w-full h-full ${isActive ? 'text-[var(--color-primary)]' : 'text-[var(--color-text-muted)]'}`
+            }>
+              <Users size={20} />
+              <span className="text-[10px] mt-1">Players</span>
+            </NavLink>
           </>
         )}
 
@@ -54,7 +61,7 @@ export const MobileNav = () => {
               <span className="text-[10px] mt-1">{t('nav.add_terrain')}</span>
             </NavLink>
 
-            <NavLink to="/profile" className={({ isActive }) =>
+            <NavLink to="/my-bookings" className={({ isActive }) =>
               `flex flex-col items-center justify-center w-full h-full ${isActive ? 'text-[var(--color-primary)]' : 'text-[var(--color-text-muted)]'}`
             }>
               <ClipboardList size={20} />

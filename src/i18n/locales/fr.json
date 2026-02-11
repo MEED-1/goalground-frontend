@@ -34,7 +34,16 @@
     "date": "Date",
     "time": "Heure",
     "mad_hour": "DH/h",
-    "save": "Enregistrer"
+    "save": "Enregistrer",
+    "stats": "Stats",
+    "player_stats": {
+      "speed": "Vitesse",
+      "passing": "Passe",
+      "shooting": "Tir",
+      "defense": "Défense",
+      "physical": "Physique",
+      "average": "Moyenne calculée"
+    }
   },
   "nav": {
     "home": "Accueil",
@@ -94,6 +103,7 @@
     "amenity_showers": "Douches",
     "ready_to_play": "Prêt à jouer ?",
     "ready_to_play_sub": "Réservez maintenant pour garantir votre créneau. Confirmation instantanée.",
+    "no_results": "Aucun terrain trouvé correspondant à vos critères.",
     "book_now_sub": "Confirmation instantanée fournie"
   },
   "owner": {
@@ -177,6 +187,18 @@
     "marrakech": "Marrakech",
     "tanger": "Tanger",
     "agadir": "Agadir",
-    "fes": "Fès"
+    "fes": "Fès",
+    "meknes": "Meknès",
+    "sale": "Salé",
+    "oujda": "Oujda",
+    "kenitra": "Kénitra",
+    "tetouan": "Tétouan",
+    "safi": "Safi",
+    "mohammedia": "Mohammédia",
+    "khouribga": "Khouribga",
+    "el_jadida": "El Jadida",
+    "beni_mellal": "Béni Mellal",
+    "nador": "Nador",
+    "settat": "Settat"
   }
 }

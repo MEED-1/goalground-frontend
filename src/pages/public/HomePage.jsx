@@ -4,8 +4,12 @@ import { Link } from 'react-router-dom';
 import { MapPin, Users, Calendar } from 'lucide-react';
 import { Button } from '../../components/ui/Button';
 
+import { useDocumentTitle } from '../../hooks/useDocumentTitle';
+import { useAuth } from '../../hooks/useAuth'; // Assuming useAuth is available
+
 export const HomePage = () => {
   const { t } = useTranslation();
+  useDocumentTitle(t('common.welcome', 'Home'));
 
   return (
     <div className="flex flex-col min-h-screen">

@@ -2,6 +2,7 @@
   "common": {
     "welcome": "Welcome to GoalGround",
     "search": "Search city...",
+    "search_by_name": "Search by name...",
     "book_now": "Book Now",
     "login": "Login",
     "register": "Register",
@@ -14,6 +15,22 @@
     "login_welcome": "Welcome back! Ready for your next match?",
     "no_account": "Don't have an account?",
     "already_account": "Already have an account?",
+    "all_cities": "All Cities",
+    "all_positions": "All Positions",
+    "all_formats": "All Formats",
+    "filters": "Filters",
+    "min_rating": "Min. Rating",
+    "min_matches": "Min. Matches",
+    "rate": "Rate",
+    "stats": "Stats",
+    "player_stats": {
+      "speed": "Speed",
+      "passing": "Passing",
+      "shooting": "Shooting",
+      "defense": "Defense",
+      "physical": "Physical",
+      "average": "Calculated Average"
+    },
     "passwords_dont_match": "Passwords don't match",
     "account_created": "Account created successfully!",
     "save": "Save",
@@ -22,8 +39,6 @@
     "email": "Email Address",
     "password": "Password",
     "confirm_password": "Confirm Password",
-    "all_cities": "All Cities",
-    "filters": "Filters",
     "name": "Name",
     "city": "City",
     "position": "Position",
@@ -91,7 +106,8 @@
     "amenity_cafe": "Cafe",
     "amenity_showers": "Showers",
     "ready_to_play": "Ready to play?",
-    "ready_to_play_sub": "Book now to secure your slot. Instant confirmation provided."
+    "ready_to_play_sub": "Book now to secure your slot. Instant confirmation provided.",
+    "no_results": "No terrains found matching your criteria."
   },
   "owner": {
     "add_terrain": "Add New Terrain",
@@ -177,6 +193,18 @@
     "marrakech": "Marrakech",
     "tanger": "Tangier",
     "agadir": "Agadir",
-    "fes": "Fez"
+    "fes": "Fez",
+    "meknes": "Meknes",
+    "sale": "Salé",
+    "oujda": "Oujda",
+    "kenitra": "Kenitra",
+    "tetouan": "Tetouan",
+    "safi": "Safi",
+    "mohammedia": "Mohammedia",
+    "khouribga": "Khouribga",
+    "el_jadida": "El Jadida",
+    "beni_mellal": "Beni Mellal",
+    "nador": "Nador",
+    "settat": "Settat"
   }
 }

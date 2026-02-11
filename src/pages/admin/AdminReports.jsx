@@ -5,19 +5,16 @@ import { PDFExport } from '../../components/admin/PDFExport';
 // Mock Data for Admin
 const MOCK_PLAYERS = [
   {
-    id: '1', name: 'Yassine Bounou', position: 'GK', city: 'Casablanca',
-    stats: { matches: 45, rating: 4.9 },
-    attributes: { speed: 6, technique: 7, physical: 9 }
+    id: '1', name: 'Yassine Bounou', position: 'GK', city: 'Casablanca', age: 32,
+    stats: { matches: 45, rating: 4.9, speed: 75, passing: 82, shooting: 30, defense: 45, physical: 88 }
   },
   {
-    id: '2', name: 'Achraf Hakimi', position: 'DEF', city: 'Rabat',
-    stats: { matches: 32, rating: 4.8 },
-    attributes: { speed: 10, technique: 8, physical: 8 }
+    id: '2', name: 'Achraf Hakimi', position: 'DEF', city: 'Rabat', age: 25,
+    stats: { matches: 32, rating: 4.8, speed: 95, passing: 84, shooting: 78, defense: 82, physical: 80 }
   },
   {
-    id: '3', name: 'Hakim Ziyech', position: 'MID', city: 'Nador',
-    stats: { matches: 28, rating: 4.7 },
-    attributes: { speed: 7, technique: 10, physical: 6 }
+    id: '3', name: 'Hakim Ziyech', position: 'MID', city: 'Nador', age: 30,
+    stats: { matches: 28, rating: 4.7, speed: 78, passing: 92, shooting: 85, defense: 55, physical: 72 }
   },
 ];
 
@@ -63,8 +60,10 @@ export const AdminReports = () => {
           <thead className="bg-[var(--color-background)] text-[var(--color-text-muted)] text-xs uppercase border-b border-[var(--color-border)]">
             <tr>
               <th className="p-4">{t('common.name')}</th>
+              <th className="p-4">{t('common.age', 'Age')}</th>
               <th className="p-4">{t('common.city')}</th>
               <th className="p-4">{t('common.position')}</th>
+              <th className="p-4">{t('common.stats', 'Stats')}</th>
               <th className="p-4">{t('common.rating')}</th>
             </tr>
           </thead>
@@ -72,7 +71,8 @@ export const AdminReports = () => {
             {filteredPlayers.map((player) => (
               <tr key={player.id} className="hover:bg-[var(--color-background)] transition-colors">
                 <td className="p-4 font-medium text-[var(--color-text)]">{player.name}</td>
-                <td className="p-4 text-[var(--color-text-muted)]">{player.city}</td>
+                <td className="p-4 text-[var(--color-text-muted)] text-sm">{player.age}</td>
+                <td className="p-4 text-[var(--color-text-muted)] text-sm">{player.city}</td>
                 <td className="p-4">
                   <span className={`
                     px-2 py-1 rounded text-xs font-bold
@@ -83,7 +83,17 @@ export const AdminReports = () => {
                     {t(`roles.${player.position}`)}
                   </span>
                 </td>
-                <td className="p-4 text-[var(--color-primary)] font-bold">{player.stats.rating}</td>
+                <td className="p-4">
+                  <div className="flex gap-2 text-[10px] font-bold uppercase tracking-tighter overflow-hidden max-w-[200px]">
+                    <span className="text-yellow-400">SPD {player.stats.speed}</span>
+                    <span className="text-blue-400">PAS {player.stats.passing}</span>
+                    <span className="text-red-400">SHT {player.stats.shooting}</span>
+                    <span className="text-green-400">DEF {player.stats.defense}</span>
+                  </div>
+                </td>
+                <td className="p-4 text-[var(--color-primary)] font-black text-lg italic">
+                  {player.stats.rating}
+                </td>
               </tr>
             ))}
           </tbody>

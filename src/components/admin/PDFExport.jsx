@@ -67,7 +67,7 @@ export const PDFExport = ({ players }) => {
                 <div className="flex justify-between items-start mb-2">
                   <div>
                     <h3 className="text-xl font-bold">{player.name}</h3>
-                    <p className="text-sm text-gray-600">{player.city}</p>
+                    <p className="text-xs text-gray-600">{player.city} • {player.age} {t('common.years', 'years')}</p>
                   </div>
                   <span className={`
                     px-2 py-1 rounded text-xs font-bold text-white
@@ -84,23 +84,41 @@ export const PDFExport = ({ players }) => {
                   <span>{t('common.rating')}: <strong>{player.stats.rating}/5</strong></span>
                 </div>
 
-                <div className="space-y-1">
-                  <div className="flex items-center text-xs">
-                    <span className="w-16">{t('admin.attr_speed')}</span>
-                    <div className="flex-1 bg-gray-300 h-2 rounded overflow-hidden">
-                      <div className="bg-black h-full" style={{ width: `${player.attributes.speed * 10}%` }}></div>
+                <div className="grid grid-cols-2 gap-x-4 gap-y-2 mt-2">
+                  <div className="flex flex-col text-[10px]">
+                    <span className="text-gray-500 uppercase font-bold">{t('admin.attr_speed', 'Speed')}</span>
+                    <div className="flex items-center gap-2">
+                      <div className="flex-1 bg-gray-200 h-1.5 rounded overflow-hidden">
+                        <div className="bg-black h-full" style={{ width: `${player.stats.speed}%` }}></div>
+                      </div>
+                      <span className="font-bold">{player.stats.speed}</span>
                     </div>
                   </div>
-                  <div className="flex items-center text-xs">
-                    <span className="w-16">{t('admin.attr_tech')}</span>
-                    <div className="flex-1 bg-gray-300 h-2 rounded overflow-hidden">
-                      <div className="bg-black h-full" style={{ width: `${player.attributes.technique * 10}%` }}></div>
+                  <div className="flex flex-col text-[10px]">
+                    <span className="text-gray-500 uppercase font-bold">{t('admin.attr_passing', 'Passing')}</span>
+                    <div className="flex items-center gap-2">
+                      <div className="flex-1 bg-gray-200 h-1.5 rounded overflow-hidden">
+                        <div className="bg-black h-full" style={{ width: `${player.stats.passing}%` }}></div>
+                      </div>
+                      <span className="font-bold">{player.stats.passing}</span>
                     </div>
                   </div>
-                  <div className="flex items-center text-xs">
-                    <span className="w-16">{t('admin.attr_physical')}</span>
-                    <div className="flex-1 bg-gray-300 h-2 rounded overflow-hidden">
-                      <div className="bg-black h-full" style={{ width: `${player.attributes.physical * 10}%` }}></div>
+                  <div className="flex flex-col text-[10px]">
+                    <span className="text-gray-500 uppercase font-bold">{t('admin.attr_shooting', 'Shooting')}</span>
+                    <div className="flex items-center gap-2">
+                      <div className="flex-1 bg-gray-200 h-1.5 rounded overflow-hidden">
+                        <div className="bg-black h-full" style={{ width: `${player.stats.shooting}%` }}></div>
+                      </div>
+                      <span className="font-bold">{player.stats.shooting}</span>
+                    </div>
+                  </div>
+                  <div className="flex flex-col text-[10px]">
+                    <span className="text-gray-500 uppercase font-bold">{t('admin.attr_defense', 'Defense')}</span>
+                    <div className="flex items-center gap-2">
+                      <div className="flex-1 bg-gray-200 h-1.5 rounded overflow-hidden">
+                        <div className="bg-black h-full" style={{ width: `${player.stats.defense}%` }}></div>
+                      </div>
+                      <span className="font-bold">{player.stats.defense}</span>
                     </div>
                   </div>
                 </div>

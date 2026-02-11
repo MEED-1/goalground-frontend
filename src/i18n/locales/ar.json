@@ -1,18 +1,19 @@
 {
   "common": {
     "welcome": "مرحبًا بكم في GoalGround",
-    "search": "ابحث عن مدينة...",
+    "search": "البحث عن مدينة...",
+    "search_by_name": "البحث بالاسم...",
     "book_now": "احجز الآن",
     "book_now_sub": "تأكيد فوري متاح",
-    "login": "دخول",
-    "register": "تسجيل",
-    "view_details": "التفاصيل",
+    "login": "تسجيل الدخول",
+    "register": "إنشاء حساب",
+    "view_details": "عرض التفاصيل",
     "price_hour": "درهم/ساعة",
     "loading": "جاري التحميل...",
-    "error": "حدث خطأ",
+    "error": "حدث خطأ ما",
     "success": "نجاح!",
     "rights": "جميع الحقوق محفوظة.",
-    "login_welcome": "مرحباً بعودتك! هل أنت مستعد لمباراتك القادمة؟",
+    "login_welcome": "مرحبًا بك مجددًا! جاهز لمباراتك القادمة؟",
     "no_account": "ليس لديك حساب؟",
     "already_account": "لديك حساب بالفعل؟",
     "passwords_dont_match": "كلمات المرور غير متطابقة",
@@ -26,7 +27,21 @@
     "password": "كلمة المرور",
     "confirm_password": "تأكيد كلمة المرور",
     "all_cities": "كل المدن",
+    "all_positions": "كل المراكز",
+    "all_formats": "كل الأنواع",
     "filters": "تصفية",
+    "min_rating": "أقل تقييم",
+    "min_matches": "أقل عدد مباريات",
+    "rate": "تقييم",
+    "stats": "الإحصائيات",
+    "player_stats": {
+      "speed": "السرعة",
+      "passing": "التمرير",
+      "shooting": "التسديد",
+      "defense": "الدفاع",
+      "physical": "البنية البدنية",
+      "average": "المعدل المحسوب"
+    },
     "name": "الاسم",
     "city": "المدينة",
     "position": "المركز",
@@ -90,7 +105,8 @@
     "amenity_cafe": "مقهى",
     "amenity_showers": "دش",
     "ready_to_play": "جاهز للعب؟",
-    "ready_to_play_sub": "احجز الآن لضمان مكانك. تأكيد فوري."
+    "ready_to_play_sub": "احجز الآن لضمان مكانك. تأكيد فوري.",
+    "no_results": "لم يتم العثور على ملاعب تطابق معاييرك."
   },
   "owner": {
     "add_terrain": "إضافة ملعب جديد",
@@ -109,10 +125,13 @@
     "complete_profile_subtitle": "ساعد الآخرين في معرفة أسلوب لعبك",
     "preferred_position": "المركز المفضل",
     "preferred_foot": "القدم المفضلة",
+    "city": "المركز المفضل",
+    "bio": "Bio",
     "foot_right": "اليمنى",
     "foot_left": "اليسرى",
     "foot_both": "كلتاهما",
-    "city": "المدينة الحالية"
+    "login_title": "تسجيل الدخول",
+    "register_title": "إنشاء حساب"
   },
   "roles": {
     "GK": "حارس مرمى",
@@ -164,6 +183,18 @@
     "marrakech": "مراكش",
     "tanger": "طنجة",
     "agadir": "أكادير",
-    "fes": "فاس"
+    "fes": "فاس",
+    "meknes": "مكناس",
+    "sale": "سلا",
+    "oujda": "وجدة",
+    "kenitra": "القنيطرة",
+    "tetouan": "تطوان",
+    "safi": "آسفي",
+    "mohammedia": "المحمدية",
+    "khouribga": "خريبكة",
+    "el_jadida": "الجديدة",
+    "beni_mellal": "بني ملال",
+    "nador": "الناظور",
+    "settat": "سطات"
   }
 }

@@ -1,15 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../context/AuthContext';
 import { Badge } from '../../components/ui/Badge';
-import { Edit2, Zap, Activity, Layout, TrendingUp, Calendar, Users, Shield } from 'lucide-react';
+import { Edit2, Zap, Activity, Layout, TrendingUp, Calendar, Users, Shield, MapPin, Phone, Save, X } from 'lucide-react';
 import { Button } from '../../components/ui/Button';
+import { Input } from '../../components/ui/Input';
+import { useDocumentTitle } from '../../hooks/useDocumentTitle';
+import toast from 'react-hot-toast';
 
 export const PlayerProfile = () => {
   const { t } = useTranslation();
-  const { user } = useAuth();
+  const { user, updateProfile } = useAuth();
+  const [isEditing, setIsEditing] = useState(false);
+  const [formData, setFormData] = useState({
+    name: user?.name || '',
+    city: user?.city || 'Casablanca',
+    phone: user?.phone || '+212 600-000000',
+    bio: user?.bio || 'Passionate football player looking for intense matches!',
+    age: user?.age || 24,
+    position: user?.position || 'MID',
+  });
+
+  useDocumentTitle(user?.name || 'Profile');
 
   if (!user) return <div className="p-10">{t('auth.login_required')}</div>;
+
+  const handleSave = () => {
+    updateProfile(formData);
+    setIsEditing(false);
+    toast.success(t('common.success', 'Profile updated!'));
+  };
 
   // --- PLAYER VIEW DATA ---
   const playerStats = { matches: 42, goals: 18, motm: 5, rating: 4.7 };
@@ -50,6 +70,14 @@ export const PlayerProfile = () => {
           <p className="text-xs text-[var(--color-text-muted)] uppercase">{t('common.goals')}</p>
         </div>
       </div>
+
+      <div className="mt-6 p-4 bg-[var(--color-background)] rounded-lg border border-[var(--color-border)]">
+        <h4 className="text-xs font-bold text-[var(--color-primary)] uppercase mb-2">Rated by Others</h4>
+        <p className="text-sm text-[var(--color-text-muted)] italic">
+          Your stats are generated based on feedback from players you've matched with.
+        </p>
+      </div>
+
       <div className="grid md:grid-cols-2 gap-8 mt-8">
         <div className="bg-[var(--color-card)] p-6 rounded-xl border border-[var(--color-border)]">
           <h3 className="text-xl font-bold mb-6 font-display flex items-center gap-2 text-[var(--color-text)]">
@@ -198,28 +226,120 @@ export const PlayerProfile = () => {
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
       {/* Profile Header */}
-      <div className="bg-[var(--color-card)] rounded-2xl p-6 border border-[var(--color-border)] mb-8 flex flex-col md:flex-row items-center md:items-start gap-6 relative overflow-hidden">
-        <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-[var(--color-card)] border-4 border-[var(--color-border)] flex items-center justify-center text-3xl font-bold text-[var(--color-primary)] z-10 uppercase">
-          {user.name.charAt(0)}
+      <div className="bg-[var(--color-card)] rounded-3xl p-8 border border-[var(--color-border)] mb-10 flex flex-col md:flex-row items-center md:items-start gap-8 relative overflow-hidden group shadow-2xl shadow-black/20">
+        {/* Background Decorative Element */}
+        <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-[var(--color-primary)]/10 to-transparent rounded-full -mr-32 -mt-32 blur-3xl group-hover:bg-[var(--color-primary)]/20 transition-all duration-700"></div>
+        <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-blue-500/5 to-transparent rounded-full -ml-16 -mb-16 blur-2xl"></div>
+
+        <div className="w-32 h-32 md:w-40 md:h-40 rounded-3xl bg-gradient-to-br from-[var(--color-card)] to-[var(--color-background)] border-4 border-[var(--color-border)] flex items-center justify-center text-5xl font-black text-[var(--color-primary)] z-10 uppercase shrink-0 shadow-xl group-hover:scale-105 group-hover:rotate-3 transition-all duration-500 relative overflow-hidden">
+          <div className="absolute inset-0 bg-black/10"></div>
+          <span className="relative z-10 italic drop-shadow-md">{formData.name.charAt(0)}</span>
         </div>
 
-        <div className="text-center md:text-left flex-1 z-10">
-          <div className="flex flex-col md:flex-row items-center gap-3 mb-2">
-            <h1 className="text-3xl font-display font-bold text-[var(--color-text)]">{user.name}</h1>
-            <Badge variant={user.role === 'player' ? 'ATT' : 'MID'}>{user.role.toUpperCase()}</Badge>
-          </div>
-          <p className="text-[var(--color-text-muted)] mb-4 flex items-center justify-center md:justify-start gap-2">
-            {user.role === 'admin' ? t('admin.system_stats') : 'Casablanca, MA'}
-          </p>
+        <div className="text-center md:text-left flex-1 z-10 w-full">
+          {isEditing ? (
+            <div className="space-y-4 mb-6">
+              <div className="grid md:grid-cols-2 gap-4">
+                <Input
+                  label={t('common.name')}
+                  value={formData.name}
+                  onChange={e => setFormData({ ...formData, name: e.target.value })}
+                />
+                <div className="grid grid-cols-2 gap-4">
+                  <Input
+                    label={t('common.age', 'Age')}
+                    type="number"
+                    value={formData.age}
+                    onChange={e => setFormData({ ...formData, age: e.target.value })}
+                  />
+                  {user.role === 'player' && (
+                    <div>
+                      <label className="block text-xs font-medium text-[var(--color-text-muted)] mb-1 uppercase tracking-wider">{t('common.position')}</label>
+                      <select
+                        className="w-full bg-[var(--color-background)] border border-[var(--color-border)] rounded-lg p-2.5 text-[var(--color-text)] focus:ring-2 focus:ring-[var(--color-primary)] focus:outline-none"
+                        value={formData.position}
+                        onChange={e => setFormData({ ...formData, position: e.target.value })}
+                      >
+                        {['GK', 'DEF', 'MID', 'ATT'].map(pos => (
+                          <option key={pos} value={pos} className="bg-[var(--color-card)]">{t(`roles.${pos}`)}</option>
+                        ))}
+                      </select>
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className="grid md:grid-cols-2 gap-4">
+                <Input
+                  label={t('common.city')}
+                  value={formData.city}
+                  onChange={e => setFormData({ ...formData, city: e.target.value })}
+                />
+                <Input
+                  label={t('auth.phone', 'Phone')}
+                  value={formData.phone}
+                  onChange={e => setFormData({ ...formData, phone: e.target.value })}
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-[var(--color-text-muted)] mb-1">{t('auth.bio')}</label>
+                <textarea
+                  className="w-full bg-[var(--color-background)] border border-[var(--color-border)] rounded-lg p-3 text-[var(--color-text)] focus:ring-2 focus:ring-[var(--color-primary)] focus:outline-none h-24"
+                  value={formData.bio}
+                  onChange={e => setFormData({ ...formData, bio: e.target.value })}
+                ></textarea>
+              </div>
+              <div className="flex gap-2">
+                <Button onClick={handleSave} className="gap-2 rounded-xl px-6"><Save size={16} /> {t('common.save')}</Button>
+                <Button variant="outline" onClick={() => setIsEditing(false)} className="gap-2 rounded-xl px-6"><X size={16} /> {t('common.cancel', 'Cancel')}</Button>
+              </div>
+            </div>
+          ) : (
+            <>
+              <div className="flex flex-col md:flex-row items-center gap-3 mb-2">
+                <h1 className="text-4xl font-display font-black text-[var(--color-text)] uppercase italic tracking-tighter">{user.name}</h1>
+                <Badge variant={user.role === 'player' ? 'ATT' : 'MID'} className="px-4 py-1 rounded-full text-sm font-black">
+                  {user.role === 'player' ? formData.position : user.role.toUpperCase()}
+                </Badge>
+              </div>
+              <div className="flex flex-wrap justify-center md:justify-start items-center gap-x-4 gap-y-2 text-[var(--color-text-muted)] mb-6 text-sm">
+                <span className="flex items-center gap-1.5 bg-[var(--color-background)]/50 px-3 py-1 rounded-full border border-[var(--color-border)]">
+                  <MapPin size={14} className="text-[var(--color-primary)]" /> {user.city || 'Casablanca'}
+                </span>
+                <span className="flex items-center gap-1.5 bg-[var(--color-background)]/50 px-3 py-1 rounded-full border border-[var(--color-border)]">
+                  <Calendar size={14} className="text-[var(--color-primary)]" /> {formData.age || 24} {t('common.years', 'years')}
+                </span>
+                <span className="flex items-center gap-1.5 bg-[var(--color-background)]/50 px-3 py-1 rounded-full border border-[var(--color-border)]">
+                  <Phone size={14} className="text-[var(--color-primary)]" /> {user.phone || '+212 600-000000'}
+                </span>
+              </div>
+              <div className="relative group max-w-xl mx-auto md:mx-0">
+                <div className="absolute -left-3 top-0 bottom-0 w-1 bg-[var(--color-primary)] rounded-full hidden md:block opacity-50"></div>
+                <p className="text-[var(--color-text-muted)] mb-8 italic leading-relaxed text-sm md:text-base">
+                  "{user.bio || 'No bio provided.'}"
+                </p>
+              </div>
+            </>
+          )}
 
-          {user.role === 'player' && renderPlayerView()}
-          {user.role === 'owner' && renderOwnerView()}
-          {user.role === 'admin' && renderAdminView()}
+          {!isEditing && (
+            <div className="w-full mt-2">
+              {user.role === 'player' && renderPlayerView()}
+              {user.role === 'owner' && renderOwnerView()}
+              {user.role === 'admin' && renderAdminView()}
+            </div>
+          )}
         </div>
 
-        <Button variant="outline" size="sm" className="absolute top-6 right-6 gap-2 hidden md:flex">
-          <Edit2 size={14} /> {t('common.edit')}
-        </Button>
+        {!isEditing && (
+          <Button
+            variant="outline"
+            size="sm"
+            className="absolute top-4 right-4 md:top-6 md:right-6 gap-2 rounded-xl border-[var(--color-primary)] text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-black transition-all font-bold"
+            onClick={() => setIsEditing(true)}
+          >
+            <Edit2 size={14} /> {t('common.edit')}
+          </Button>
+        )}
       </div>
     </div>
   );

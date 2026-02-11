@@ -6,6 +6,7 @@ import { useAuth } from '../../context/AuthContext';
 import { useLanguage } from '../../context/LanguageContext';
 import { Button } from '../ui/Button';
 import { ThemeToggle } from '../ui/ThemeToggle';
+import { LanguageSelector } from '../ui/LanguageSelector';
 
 export const Navbar = () => {
   const { t } = useTranslation();
@@ -42,6 +43,9 @@ export const Navbar = () => {
                 <Link to="/matches" className="text-[var(--color-text-muted)] hover:text-[var(--color-primary)] transition-colors">
                   {t('nav.find_match')}
                 </Link>
+                <Link to="/players" className="text-[var(--color-text-muted)] hover:text-[var(--color-primary)] transition-colors">
+                  {t('nav.find_players', 'Find Players')}
+                </Link>
               </>
             )}
 
@@ -53,7 +57,7 @@ export const Navbar = () => {
                 <Link to="/owner/add-terrain" className="text-[var(--color-text-muted)] hover:text-[var(--color-primary)] transition-colors">
                   {t('nav.add_terrain')}
                 </Link>
-                <Link to="/profile" className="text-[var(--color-text-muted)] hover:text-[var(--color-primary)] transition-colors">
+                <Link to="/my-bookings" className="text-[var(--color-text-muted)] hover:text-[var(--color-primary)] transition-colors">
                   {t('nav.my_bookings')}
                 </Link>
               </>
@@ -73,15 +77,7 @@ export const Navbar = () => {
             {/* Language Switcher and Theme Toggle */}
             <div className="flex items-center gap-2 border-l border-[var(--color-border)] pl-4">
               <ThemeToggle />
-              <select
-                value={language}
-                onChange={(e) => changeLanguage(e.target.value)}
-                className="bg-transparent text-sm text-[var(--color-text)] focus:outline-none cursor-pointer"
-              >
-                <option value="en" className="bg-[var(--color-card)]">EN</option>
-                <option value="fr" className="bg-[var(--color-card)]">FR</option>
-                <option value="ar" className="bg-[var(--color-card)]">AR</option>
-              </select>
+              <LanguageSelector />
             </div>
 
             {/* Auth Buttons */}
@@ -92,7 +88,7 @@ export const Navbar = () => {
                     <div className="w-8 h-8 rounded-full bg-[var(--color-card)] border border-[var(--color-border)] flex items-center justify-center text-[var(--color-primary)]">
                       <UserIcon size={16} />
                     </div>
-                    <span className="text-sm font-medium">{user.name}</span>
+                    <span className="text-sm font-medium">{user.name} ({user.role})</span>
                   </div>
                 </Link>
                 <Button variant="ghost" size="sm" onClick={logout}>
@@ -111,11 +107,23 @@ export const Navbar = () => {
             )}
           </div>
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center">
-            <button className="text-[var(--color-text)] hover:text-[var(--color-primary)]">
-              <Menu size={24} />
-            </button>
+          {/* Mobile Auth/Actions */}
+          <div className="md:hidden flex items-center gap-4">
+            <LanguageSelector />
+            <ThemeToggle />
+            {user ? (
+              <button
+                onClick={logout}
+                className="text-[var(--color-text)] hover:text-[var(--color-primary)] p-2 rounded-full hover:bg-[var(--color-card)] transition-colors"
+                title={t('nav.logout')}
+              >
+                <LogOut size={22} />
+              </button>
+            ) : (
+              <Link to="/login" className="text-[var(--color-primary)] font-bold text-sm">
+                {t('common.login')}
+              </Link>
+            )}
           </div>
         </div>
       </div>
